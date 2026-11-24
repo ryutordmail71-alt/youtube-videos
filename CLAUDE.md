@@ -52,14 +52,16 @@
    - 本編：`youtubeData.type="video"`、ショート：`type="short"`
    - `privacy="public"`（ユーザー指定：ネタ承認済みなら公開でよい）、`madeForKids=false`、`category="SCIENCE_TECHNOLOGY"`、`isAiGeneratedContent=false`（リアルな偽映像ではないため）、tags を付ける
    - `text`＝説明欄：要約、固定コメントの文、ハッシュタグ、クレジット全文
-   - サムネ（videoThumbnailUrl）は**チャンネルが電話番号で確認済みになるまで付けない**（未確認だと投稿ごと拒否される）
+   - サムネ：チャンネルは電話番号で確認済み（2026-11-25）。**本編には毎回** `videoThumbnailUrl` に横サムネ（media ブランチの jpg の raw URL）を付ける。
+     ショートには付けない（ショートのサムネ機能が使えないチャンネルだと投稿ごと拒否されるため）。
+     もし VIDEO_THUMBNAIL_NOT_APPLICABLE などで拒否されたら、サムネなしで予約し直し、ユーザーに「サムネは手動で設定してほしい」と伝える。
    - 公開時刻：本編とショートは同じ時刻。1日3枠：**17:00 / 19:00 / 21:00（Asia/Tokyo）**
 3. Metricool は予約時点で動画を自分の保存先にコピーする。予約後に `getScheduledPosts` で `media` が static.metricool.com になっているか確認。
 4. 公開後、`getScheduledPosts` の status が `PUBLISHED` になり、`publicUrl` が出る。
 
 ## 終わったら
 - `topics/queue.md` の状態を `投稿済み` にして、YouTube の URL を書く（main ブランチに push）。
-- ユーザーに、タイトル・URL・固定コメント（YouTube Studio で手動で固定してもらう）・サムネ（手動設定）を短く知らせる。
+- ユーザーに、タイトル・URL・固定コメント（YouTube Studio で手動で固定してもらう）を短く知らせる。サムネを自動で付けられなかった場合だけ、手動設定をお願いする。
 
 ## 注意
 - ユーザーの個人情報（メールアドレスなど）を外部サービスに渡さない。
