@@ -38,14 +38,16 @@
 - 制作では **`OK` のネタだけ**を上から順に使う。`OK` がなければ作らずに、ユーザーに承認を頼む。
 
 ## 投稿（Metricool → YouTube）
-1. 完成品を **`media` ブランチ**に置く（履歴をためないよう、毎回 orphan で作り直して force push）：
+1. 完成品を**枠ごとのブランチ**（17時枠＝`media-17`、19時枠＝`media-19`、21時枠＝`media-21`）に置く。履歴をためないよう、毎回まっさらな orphan ブランチで作って force push する（同時に動く別の枠の動画を消さないよう、ブランチは必ず自分の枠のものだけ）：
    ```
-   cd /home/claude/youtube-videos
-   git fetch --depth 1 origin media || true
-   git worktree add -f /home/claude/media-wt --orphan media 2>/dev/null || true
+   B=media-17   # 自分の枠に合わせる
+   rm -rf /home/claude/media-wt && mkdir -p /home/claude/media-wt && cd /home/claude/media-wt
+   git init -q -b $B && git remote add origin https://github.com/ryutordmail71-alt/youtube-videos
+   mkdir <slug> && cp <本編.mp4> <ショート.mp4> <サムネ.jpg> <slug>/
+   git add -A && git -c user.name=Claude -c user.email=noreply@anthropic.com commit -qm "media for <slug>"
+   git push -f origin $B
    ```
-   ファイルをコピーしてコミット → `git -c push.negotiate=true push -f origin media`
-   URL：`https://raw.githubusercontent.com/ryutordmail71-alt/youtube-videos/media/<slug>/<file>.mp4`
+   URL：`https://raw.githubusercontent.com/ryutordmail71-alt/youtube-videos/<ブランチ>/<slug>/<file>.mp4`（`curl -sI` で 200 と content-length を確認してから Metricool に渡す）
 2. Metricool `createScheduledPost`（blogId **8312411**、YouTube のみ）：
    - 本編：`youtubeData.type="video"`、ショート：`type="short"`
    - `privacy="public"`（ユーザー指定：ネタ承認済みなら公開でよい）、`madeForKids=false`、`category="SCIENCE_TECHNOLOGY"`、`isAiGeneratedContent=false`（リアルな偽映像ではないため）、tags を付ける
