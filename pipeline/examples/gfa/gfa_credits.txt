@@ -1,0 +1,35 @@
+【クレジット】巨人は立ち上がると気絶する？
+
+■ 写真（Wikimedia Commons）
+・巨人のもとにした人物写真
+  "Mealy Mountain Labrador bugs.jpg" by Paul Gierszewski
+  ライセンス：CC BY-SA 4.0（https://creativecommons.org/licenses/by-sa/4.0/）
+  https://commons.wikimedia.org/wiki/File:Mealy_Mountain_Labrador_bugs.jpg
+  ※切り抜き・拡大・虫の除去・色調整・回転などの加工をしています
+・人・キリンのイラスト、森・山・家などの背景は、このためにプログラムで描いたものです
+
+■ ナレーション
+VOICEVOX:青山龍星
+
+■ BGM
+"Investigations" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+■ 効果音
+心臓の音・耳鳴り・倒れる音などは、すべてプログラムで合成しました
+
+■ シミュレーションで使った数字（目安）
+・血の重さによる圧力：高さ1mあたり 約78mmHg（血液の密度 1,060kg/m³）
+・人：心臓の平均血圧 約90mmHg、心臓から脳まで 約35cm、足まで 約1.3m、心拍 約70回/分
+・キリン：心臓の平均血圧 約200mmHg、頭 約100mmHg、ひづめ付近 約260〜300mmHg（Hasenkamp ほか, Annual Review of Physiology, 2021 などのまとめ）
+・巨人（×29）：心臓から脳まで 約10m、足まで 約37m
+  必要な心臓の血圧 ＝ 70 ＋ 78 × 10 ≒ 約850mmHg、足は 約3,700mmHg
+・巨人の心拍：動物の心拍数は体重の −1/4 乗に比例 → 70 ÷ 12.4 ≒ 約6回/分
+・シロナガスクジラの心拍：潜水中 最低2回/分（Goldbogen ほか, 2019）
+・気絶の条件：脳の血圧が30mmHgを下回る状態が合計7秒（実験では脳への血流が止まって4〜10秒で意識を失う：Rossen ほか, 1943）
+・心臓は「3拍」くらいの時間をかけて血圧を目標に近づけ、立ち上がりの時は一時的に20mmHg下がると仮定
+・立ち上がるのにかかる時間：人 2秒、巨人 2×√29 ≒ 約11秒
+・バロサウルスに必要な血圧 約700mmHg（Seymour & Lillywhite, 2000 などの推定）
+
+※実データをもとにした、単純化した空想のシミュレーションです。

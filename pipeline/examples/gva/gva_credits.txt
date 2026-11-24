@@ -1,0 +1,31 @@
+【クレジット】巨人 vs 人間の軍隊（綱引き）
+
+■ 写真（Wikimedia Commons）
+・巨人のもとにした人物写真
+  "Mealy Mountain Labrador bugs.jpg" by Paul Gierszewski
+  ライセンス：CC BY-SA 4.0（https://creativecommons.org/licenses/by-sa/4.0/）
+  https://commons.wikimedia.org/wiki/File:Mealy_Mountain_Labrador_bugs.jpg
+  ※切り抜き・拡大・虫の除去・色調整・回転などの加工をしています
+・兵士、森・山・家などの背景は、このためにプログラムで描いたものです
+
+■ ナレーション
+VOICEVOX:青山龍星
+
+■ BGM
+"Volatile Reaction" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+■ 効果音
+笛・かけ声・綱のきしみ・倒れる音などは、すべてプログラムで合成しました
+
+■ シミュレーションで使った数字（目安）
+・巨人：身長50m（人の約29倍）。体重は 29³ ≒ 2万3000倍（約1,600t）
+・力は筋肉の断面積に比例すると考え、29² ≒ 816倍
+・1人で綱を引く力：約63kg（Ringelmann, 1913 の綱引き実験）
+・大人数での1人あたりの力：8人のときの49%（約31kg）のままと仮定（リンゲルマン効果／社会的手抜き）
+・巨人の力：63kg × 816 ≒ 5万1400kg
+・互角になる人数：5万1400 ÷ 31 ≒ 約1,670人
+・倒れたときの頭の速さ：まっすぐな棒が倒れるとして √(3 × 重力 × 高さ)。巨人 約38m/秒（時速約140km）、人 約7m/秒（時速約26km）
+
+※実データをもとにした、単純化した空想のシミュレーションです。
