@@ -33,7 +33,11 @@
 - 制作を始める前に **`analytics/insights.md` を必ず読み**、「いまのルール」と「実験」に従う（タイトル・ショートの最初の1秒・サムネなど）。品質基準より優先はしない。
 - ネタの重複は `topics/queue.md` だけでなく `analytics/videos.csv`（チャンネルの過去動画）とも確かめる。
 - 投稿したら `analytics/videos.csv` に1行足して main に push（列の意味は insights.md）。
-- 分析そのもの（数字を集めて insights.md を書き直す）は毎日 12:47 の分析担当がやる。
+- 分析そのもの（数字を集めて insights.md を書き直す）は、**15時枠の担当（09:13開始）が制作の前に10分ほどで**やる（ほかの枠はやらない）：
+  1. Metricool `getAnalyticsDataByMetrics`（brandId 8312411）で、YTEV01・YTEV02・YTEV04（チャンネル全体、daily_views.csv の続きから昨日まで）と、YTVP02・YTVP17・YTVP06・YTVP08・YTVP09・YTVP11・YTVP12（動画ごと、直近14日）を取る。null は空のまま。
+  2. daily_views.csv と videos.csv を埋め、Python でジャンル別・型別・枠別・実験A/B別に集計する。5本未満の比較で決めつけない。
+  3. insights.md を更新する（1日に変えるルールは1〜2個まで）。main に push（衝突したら pull --rebase）。
+  4. 新しい気づきがあったときだけ、ユーザーに3行ほどで知らせる。動画ごとの数字が取れない状態が続くなら、週に1回だけ YouTube Studio のスクショをお願いする。
 
 ## 品質チェック（公開前に必ず全部）
 - 数値は資料で確認し、出典をクレジットに書く。推定・仮定は画面と説明欄に「目安」「仮定」と明記。
