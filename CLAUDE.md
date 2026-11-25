@@ -74,6 +74,14 @@
 3. Metricool は予約時点で動画を自分の保存先にコピーする。予約後に `getScheduledPosts` で `media` が static.metricool.com になっているか確認。
 4. 公開後、`getScheduledPosts` の status が `PUBLISHED` になり、`publicUrl` が出る。
 
+## ショートと本編の関連付け（ユーザー指示 2026-11-26）
+- ショートの「関連動画」に同じネタの本編をつなぎたい。ただし Metricool にも YouTube の公開 API にもこの設定項目がない（2026-11 時点）ので、自動ではできない。ユーザーが YouTube Studio で設定する（ショートの詳細 →「関連動画」→ 本編を選ぶ）。
+- そのため、**15時枠の担当は分析のついでに**、前日〜当日朝に公開されたペア（getScheduledPosts の publicUrl）を集めて、ユーザーに次の形で1通にまとめて送る：
+  「関連動画の設定をお願いします（YouTube Studio → ショートの詳細 → 関連動画）」
+  ・<ショートのタイトル>（ショートURL）→ <本編URL>
+- 送ったペアは analytics/videos.csv の notes に「関連付け依頼済み」と書く。
+- 将来 Metricool や API でできるようになったら、自動で設定する手順に切り替える。
+
 ## 終わったら
 - `topics/queue.md` の状態を `投稿済み` にして、YouTube の URL を書く（main ブランチに push）。
 - ユーザーに、タイトル・URL・固定コメント（YouTube Studio で手動で固定してもらう）を短く知らせる。サムネを自動で付けられなかった場合だけ、手動設定をお願いする。
