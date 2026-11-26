@@ -59,3 +59,37 @@ def grain(im, amt=5):
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
 def save(im, path):
     grain(im).resize((1280, 720), Image.LANCZOS).save(path, quality=93)
+
+# ---- 「カネと格差の解剖学」型：太い大文字＋赤いキーワード＋小さい助詞 ----
+RED = (232, 32, 42)
+def _outlined(im, xy, t, f, fill, inner=(255, 255, 255), w_in=0, w_out=10, shadow=True):
+    x, y = xy
+    if shadow:
+        l = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(l).text((x + 6, y + 10), t, font=f, fill=(0, 0, 0, 220), anchor='ls', stroke_width=w_out + w_in + 4, stroke_fill=(0, 0, 0, 220))
+        im.alpha_composite(l.filter(ImageFilter.GaussianBlur(10)))
+    d = ImageDraw.Draw(im)
+    d.text((x, y), t, font=f, fill=(0, 0, 0), anchor='ls', stroke_width=w_out + w_in, stroke_fill=(0, 0, 0))
+    if w_in: d.text((x, y), t, font=f, fill=inner, anchor='ls', stroke_width=w_in, stroke_fill=inner)
+    d.text((x, y), t, font=f, fill=fill, anchor='ls')
+def impact_lines(im, lines, x=60, y0=60, gap=18, max_w=1050):
+    """lines = [[(文字, 大きさ, 'w'|'r'|'y'), ...], ...]  w=白, r=赤(白フチ), y=黄。助詞は小さく。"""
+    y = y0
+    for parts in lines:
+        tot = sum(MIN(s).getlength(t) for t, s, c in parts); k = min(1.0, max_w / tot) if tot else 1
+        h = max(s for t, s, c in parts) * k; y += h * 0.86; xx = x
+        for t, s, c in parts:
+            f = MIN(int(s * k))
+            if c == 'r': _outlined(im, (xx, y), t, f, RED, inner=(255, 255, 255), w_in=7, w_out=7)
+            elif c == 'y': _outlined(im, (xx, y), t, f, (255, 215, 40), w_out=10)
+            else: _outlined(im, (xx, y), t, f, (255, 255, 255), w_out=12)
+            xx += f.getlength(t) - s * k * 0.02
+        y += gap
+    return y
+def etch(img, tone=(255, 210, 150), contrast=1.6):
+    """写真を、細密な版画っぽいセピア調に（主役の写真用）"""
+    g = img.convert('L'); g = ImageEnhance.Contrast(g).enhance(contrast)
+    edge = g.filter(ImageFilter.FIND_EDGES).point(lambda v: 255 - min(255, v * 2))
+    g = Image.blend(g, edge, 0.25)
+    a = np.asarray(g).astype(np.float32) / 255
+    out = np.stack([a * tone[0], a * tone[1], a * tone[2]], -1)
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8)).convert('RGBA')

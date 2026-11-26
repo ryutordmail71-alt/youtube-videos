@@ -34,9 +34,9 @@ def round_sfx(y, off, j, d, kind):
         for k in range(16): X.put(y, off + j['tf'] + 0.3 + k * 0.55, servo(0.5, 0.1))
         X.put(y, off + d - 1.6, powerdown(1.4, 0.3))
 if mode == 'main':
-    order = ['title', 'data', 'rule', 'r1', 'res1', 'r2', 'res2', 'reveal', 'sweep', 'r3', 'res3', 'outro']
+    order = ['title', 'jingle', 'data', 'rule', 'r1', 'res1', 'rh1', 'r2', 'wow2', 'res2', 'reveal', 'sweep', 'rh2', 'r3', 'wow3', 'res3', 'outro']
     meta = {}
-    for w in ('static', 'r1', 'r2', 'r3'): meta.update(json.load(open(f'{G}/scene_{w}.json')))
+    for w in ('static', 'r1', 'r2', 'r3', 'ins'): meta.update(json.load(open(f'{G}/scene_{w}.json')))
     clips = [f'{G}/c_{k}.mp4' for k in order]; X.concat(clips, f'{G}/main_video.mp4')
     T = X.dur(f'{G}/main_video.mp4'); n = int(T * SR) + SR; voice = np.zeros(n, np.float32); sfx = np.zeros(n, np.float32); off = 0.0
     for k, c in zip(order, clips):
@@ -46,6 +46,9 @@ if mode == 'main':
         if k.startswith('res'): X.put(sfx, off + 0.05, X.boom(1.5, 45, 0.5))
         if k == 'title': X.put(sfx, 0.05, X.boom(2.0, 38, 0.45)); X.put(sfx, 0.1, hum(3.0, 0.05))
         if k == 'data': X.put(sfx, off + 0.0, glitch(0.4, 0.18, 7)); X.put(sfx, off + 0.05, X.boom(1.2, 50, 0.4))
+        if k == 'jingle': X.put(sfx, off + 0.05, beep(988, 0.12, 0.22)); X.put(sfx, off + 0.17, beep(1318, 0.35, 0.22)); X.put(sfx, off + 0.05, X.boom(0.8, 60, 0.3))
+        if k in ('wow2', 'wow3'): X.put(sfx, off + 0.0, X.boom(1.4, 42, 0.75)); X.put(sfx, off + 0.0, X.thump(70, 0.4, 0.8))
+        if k in ('rh1', 'rh2'): X.put(sfx, off + 0.0, glitch(0.35, 0.16, 9)); X.put(sfx, off + 0.05, X.boom(1.0, 50, 0.4))
         if k == 'reveal': X.put(sfx, off + 0.05, X.boom(1.5, 38, 0.45))
         off += d
     X.finish(f'{G}/main_video.mp4', voice, sfx, T, '/home/claude/bgm/Investigations.mp3', f'{G}/air_main.mp4', '1100k')
