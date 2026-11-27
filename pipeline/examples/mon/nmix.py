@@ -35,7 +35,7 @@ def round_sfx(y, off, j, d, kind):
         for k in range(int((d - j['tf'] - 1) / 2.6)): X.put(y, off + j['tf'] + 1.4 + k * 2.6, hiss(1.8, 0.1))
     else:
         X.put(y, off + j['tf'] + 0.4, drone(d - j['tf'] - 0.5, 48, 0.07))
-        X.put(y, off + d - 2.6, X.boom(1.6, 40, 0.42))
+        X.put(y, off + d - 2.6, X.thump(110, 0.35, 0.34, 18))
         for k in range(26): X.put(y, off + d - 2.5 + rng.uniform(0, 2.0), pop(0.05))
 if mode == 'main':
     order = ['title', 'jingle', 'data', 'rule', 'r1', 'res1', 'rh1', 'r2', 'wow2', 'res2', 'reveal', 'sweep', 'rh2', 'r3', 'wow3', 'res3', 'outro']
@@ -47,14 +47,14 @@ if mode == 'main':
         d = X.dur(c)
         for t, key in meta[k][1]: X.put(voice, off + t, X.rd(f'{G}/voice/{key}.wav'))
         if k in ('r1', 'r2', 'r3'): round_sfx(sfx, off, json.load(open(f'{G}/c_{k}_t.json')), d, k)
-        if k.startswith('res'): X.put(sfx, off + 0.05, X.boom(1.5, 45, 0.4))
+        if k.startswith('res'): X.put(sfx, off + 0.05, X.thump(110, 0.35, 0.32, 18))
         if k == 'title': X.put(sfx, 0.0, drone(d, 55, 0.07)); X.put(sfx, 0.05, whoosh(1.2, 0.15)); X.put(sfx, 0.1, ping(0.08))
         if k == 'data': X.put(sfx, off, whoosh(0.8, 0.2))
         if k == 'jingle': X.put(sfx, off + 0.05, beep(988, 0.12, 0.18)); X.put(sfx, off + 0.17, beep(1318, 0.35, 0.18))
-        if k in ('wow2', 'wow3'): X.put(sfx, off + 0.0, X.boom(1.4, 42, 0.55)); X.put(sfx, off + 0.0, X.thump(70, 0.4, 0.7))
-        if k in ('rh1', 'rh2'): X.put(sfx, off + 0.0, whoosh(0.9, 0.25)); X.put(sfx, off + 0.05, X.thump(50, 0.6, 0.5, 6))
+        if k in ('wow2', 'wow3'): X.put(sfx, off + 0.0, X.thump(110, 0.35, 0.44, 18)); X.put(sfx, off + 0.0, X.thump(110, 0.35, 0.42, 18))
+        if k in ('rh1', 'rh2'): X.put(sfx, off + 0.0, whoosh(0.9, 0.25)); X.put(sfx, off + 0.05, X.thump(110, 0.35, 0.30, 18))
         if k in ('reveal', 'sweep'): X.put(sfx, off, drone(d, 49, 0.06))
-        if k == 'reveal': X.put(sfx, off + 0.05, X.boom(1.5, 38, 0.35))
+        if k == 'reveal': X.put(sfx, off + 0.05, X.thump(110, 0.35, 0.28, 18))
         off += d
     X.finish(f'{G}/main_video.mp4', voice, sfx, T, '/home/claude/bgm/Investigations.mp3', f'{G}/mon_main.mp4', '1100k')
 else:
@@ -65,6 +65,6 @@ else:
     X.put(sfx, s0, whoosh(0.6, 0.2))
     for k in range(3): X.put(sfx, s0 + 0.5 + k * 1.8, ping(0.07))
     X.put(sfx, s1, whoosh(0.6, 0.2)); X.put(sfx, s1 + 0.4, drone(5.0, 58, 0.06)); X.put(sfx, s1 + 1.2, hiss(1.6, 0.09))
-    X.put(sfx, s2, whoosh(0.6, 0.2)); X.put(sfx, s2 + 0.3, drone(5.0, 48, 0.06)); X.put(sfx, m['end0'] - 1.0, X.boom(1.4, 42, 0.3))
+    X.put(sfx, s2, whoosh(0.6, 0.2)); X.put(sfx, s2 + 0.3, drone(5.0, 48, 0.06)); X.put(sfx, m['end0'] - 1.0, X.thump(110, 0.35, 0.24, 18))
     X.finish(f'{G}/s_video.mp4', voice, sfx, T, '/home/claude/bgm/Volatile_Reaction.mp3', f'{G}/mon_short.mp4', '2500k', maxrate='4000k')
 print('mixed', mode)
