@@ -1,0 +1,32 @@
+【クレジット】宇宙に生身で放り出されたら、何秒もつ？
+
+■ 画像
+・サムネイルの写真：NASA（iss044e045215、国際宇宙ステーションから見た地球のふちと天の川）
+・動画の冒頭とショートの背景の写真：NASA（iss044e045215）
+・人のシルエット・ストップウォッチ・体温計・肺・脳・メーターなどの絵は、すべてこの動画のためにプログラムで描いたものです
+
+■ ナレーション
+VOICEVOX:青山龍星
+
+■ BGM
+"Investigations" / "Volatile Reaction" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+■ 効果音
+空気が抜ける音・泡の音・時計の音・心臓の音などは、すべてプログラムで合成しました
+
+■ シミュレーションで使った数字
+・地上の気圧 約1,013hPa、富士山頂 約634hPa、エベレスト山頂 約314hPa、高さ1万m 約264hPa：国際標準大気で計算した目安
+・37℃の水が沸騰する気圧 約6.3kPa（約63hPa）、高さ約18〜19km（アームストロング限界）：Wikipedia「Armstrong limit」
+・宇宙の背景の温度 約2.7K（約マイナス270℃）：宇宙マイクロ波背景放射の温度
+・体はふくらむが、皮膚が丈夫で破裂しない／意識がもつのは約10〜15秒／息を止めると肺が傷つく：Live Science「How long could a person survive in space without a spacesuit?」（ヨーロッパ宇宙機関 ESA の専門家の話）
+・約90秒以内に空気のある場所へ戻れば助かった、2分をこえると助からないことが多かった（1960年代の動物実験の記録）：Scientific American「Survival in Space Unprotected Is Possible--Briefly」
+・意識が保たれる時間の別の目安 9〜12秒：FAA の資料（C. Baird「Science Questions with Surprising Answers」より）
+
+■ 仮定・計算（この動画での単純化）
+・宇宙服なしで宇宙ステーションの外に出たとする空想の設定。実在の事故や人物は扱いません
+・2回戦の体温：体重60kg、体の表面1.8m²、皮膚の温度33℃、日かげ（太陽の光なし）として、赤外線で逃げる熱をシュテファン＝ボルツマンの法則で計算（約880W）。体の中で作る熱 約100Wを差し引いて約800W。体の比熱を約3.5kJ/(kg・℃)として、体全体の平均で1分に約0.2℃下がる目安。実際は皮膚の表面や口・目の水分から先に冷えます
+・1回戦の「ふくらみ方」、決勝戦の「脳に届く酸素のバー」と「画面の暗さ」はイメージです
+
+※実データをもとにした、単純化した空想のシミュレーションです。
