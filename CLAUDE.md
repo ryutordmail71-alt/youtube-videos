@@ -29,6 +29,7 @@
 - ナレーション：VOICEVOX「青山龍星」（speaker 13）、speedScale 1.12。数字や漢字の読みは YOMI 表で直し、`python3 xaudio.py kana` で読みを必ず確認してから合成。
 - BGM：Kevin MacLeod（Investigations / Volatile Reaction、CC BY 4.0）。効果音はすべてプログラムで合成。
 - 画像：Wikimedia Commons の自由ライセンス画像（クレジット必須）。Commons は 429 が出やすいので、ダメなら自作の絵で代用。
+- **検証系は @ko-ji（Experiment with PhysicsEngine）の型をまねる**（ユーザー指示 2026-11-27）：「本当に〜なのか試した結果」、条件を1つ変えて並べて同時に動かす、予想させてから実行。動き（落下・投げる・転がる・衝突）は `pipeline/physics.py` で物理の式から計算して描く。詳しくは insights.md の手法34〜39。
 - 構成：タイトル → データ比較 → ルール → 1回戦 → 結果 → 種明かし → 人数・条件を変えた表 → 決勝 → 結果 → まとめ（法則の話）→ コメント誘導。
 - 音量：acompressor → loudnorm I=-14:TP=-2.5 → alimiter。仕上がり -13〜-15 LUFS、ピーク -1 dBFS 以下。
 - 参考になるコード：`pipeline/examples/`（gvm＝巨人vs蚊、gva＝巨人vs綱引き、gfa＝巨人は気絶する？）、`pipeline/legacy/`（それ以前の動画の部品）。`setup.sh` が examples を /home/claude/gvm などにコピーするので、そのまま import できる。
