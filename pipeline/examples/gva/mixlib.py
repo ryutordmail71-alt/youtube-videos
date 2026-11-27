@@ -62,7 +62,7 @@ def finish(video, voice, sfx, T, bgmf, out, br, bgm_gain=0.22, maxrate='2000k'):
     mix = mix / max(1.0, np.abs(mix).max() / 0.95)
     with wave.open(out + '.mix.wav', 'wb') as w: w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes())
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', video, '-i', out + '.mix.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-preset', 'medium', '-b:v', br, '-maxrate', maxrate, '-bufsize', '4000k',
-                    '-pix_fmt', 'yuv420p', '-af', 'acompressor=threshold=-18dB:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-2.5:LRA=11,alimiter=limit=0.8', '-ar', '48000',
+                    '-pix_fmt', 'yuv420p', '-af', 'highpass=f=40,acompressor=threshold=-18dB:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-2.5:LRA=11,alimiter=limit=0.8', '-ar', '48000',
                     '-c:a', 'aac', '-b:a', '160k', '-ac', '2', '-shortest', '-movflags', '+faststart', out], check=True)
 def concat(clips, out):
     lst = out + '.txt'; open(lst, 'w').write(''.join(f"file '{c}'\n" for c in clips))

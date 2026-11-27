@@ -7,11 +7,11 @@ ORDER = ['title', 'data', 'rule', 'r1', 'res1', 'secret', 'table', 'r3', 'res3',
 def whoosh(L=0.7, g=0.22):
     n = int(L * SR); t = np.arange(n) / SR; y = X.lp(X.rng.normal(0, 1, n), 20) * np.sin(np.pi * t / L) ** 2
     return (y * g).astype(np.float32)
-def drone(L, f0=55, g=0.10):
-    n = int(L * SR); t = np.arange(n) / SR
-    y = np.sin(2 * np.pi * f0 * t) + 0.6 * np.sin(2 * np.pi * f0 * 1.498 * t + 1) + 0.4 * np.sin(2 * np.pi * f0 * 0.5 * t)
-    y *= 0.6 + 0.4 * np.sin(2 * np.pi * 0.15 * t); env = np.minimum(1, t / 2.0) * np.minimum(1, (L - t) / 2.0)
-    return (y * env * g).astype(np.float32)
+def drone(L, f0=55, g=0.08, *a, **k):
+    """（2026-11-27 変更）低いうなり・ザラザラしたノイズは音割れっぽく聞こえるので使わない。代わりに小さく澄んだ和音（110Hz以上）"""
+    n = int(L * SR); t = np.arange(n) / SR; f = max(110.0, float(f0) * 2)
+    y = np.sin(2 * np.pi * f * t) * 0.6 + np.sin(2 * np.pi * f * 1.5 * t) * 0.3 + np.sin(2 * np.pi * f * 2 * t) * 0.15
+    env = np.minimum(1, t / 1.5) * np.minimum(1, np.maximum(0, L - t) / 1.5); return (y * env * g * 0.5).astype(np.float32)
 def groan(L=1.4, g=0.16):
     n = int(L * SR); t = np.arange(n) / SR; f = 85 * (1 - 0.25 * t / L) * (1 + 0.03 * np.sin(2 * np.pi * 6 * t)); ph = 2 * np.pi * np.cumsum(f) / SR
     y = (np.sign(np.sin(ph)) * 0.4 + np.sin(ph)) + X.lp(X.rng.normal(0, 1, n), 3) * 0.5

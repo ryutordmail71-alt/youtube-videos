@@ -10,9 +10,11 @@ def hiss(L=2.0, g=0.25):
     """空気が抜ける音"""
     n = int(L * SR); t = np.arange(n) / SR; y = rng.normal(0, 1, n).astype(np.float32); y = y - X.lp(y, 6)
     return (y * np.minimum(1, t / 0.03) * np.exp(-t * 1.6) * g).astype(np.float32)
-def drone(L, f=55, g=0.08):
-    n = int(L * SR); t = np.arange(n) / SR; y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * f * 1.5 * t + np.sin(t * 0.7)) + X.lp(rng.normal(0, 1, n), 200) * 3
-    env = np.minimum(1, t / 1.0) * np.minimum(1, np.maximum(0, L - t) / 1.0); return (y * env * g).astype(np.float32)
+def drone(L, f0=55, g=0.08, *a, **k):
+    """（2026-11-27 変更）低いうなり・ザラザラしたノイズは音割れっぽく聞こえるので使わない。代わりに小さく澄んだ和音（110Hz以上）"""
+    n = int(L * SR); t = np.arange(n) / SR; f = max(110.0, float(f0) * 2)
+    y = np.sin(2 * np.pi * f * t) * 0.6 + np.sin(2 * np.pi * f * 1.5 * t) * 0.3 + np.sin(2 * np.pi * f * 2 * t) * 0.15
+    env = np.minimum(1, t / 1.5) * np.minimum(1, np.maximum(0, L - t) / 1.5); return (y * env * g * 0.5).astype(np.float32)
 def pop(g=0.08):
     n = int(0.05 * SR); t = np.arange(n) / SR; f = rng.uniform(600, 1400); return (np.sin(2 * np.pi * f * t * (1 + 3 * t)) * np.exp(-t * 90) * g).astype(np.float32)
 def tick(g=0.12):
