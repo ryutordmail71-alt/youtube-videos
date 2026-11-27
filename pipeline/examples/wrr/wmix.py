@@ -15,6 +15,11 @@ def crowd(L=2.5, g=0.12):
     env = np.minimum(1, t / 0.3) * np.exp(-np.maximum(0, t - 0.6) * 1.2); return (y * env * g * 3).astype(np.float32)
 def pistol(g=0.4):
     n = int(0.35 * SR); t = np.arange(n) / SR; y = rng.normal(0, 1, n) * np.exp(-t * 30); return (y * g).astype(np.float32)
+def pad(L, g=0.035):
+    """小さく澄んだ和音（110Hz以上）"""
+    n = int(L * SR); t = np.arange(n) / SR; f = 110.0
+    y = np.sin(2 * np.pi * f * t) * 0.6 + np.sin(2 * np.pi * f * 1.5 * t) * 0.3 + np.sin(2 * np.pi * f * 2 * t) * 0.15
+    return (y * np.minimum(1, t / 1.5) * np.minimum(1, np.maximum(0, L - t) / 1.5) * g).astype(np.float32)
 def ff(L, g=0.05):
     """早送りのチリチリ音"""
     n = int(L * SR); t = np.arange(n) / SR; y = np.sign(np.sin(2 * np.pi * 9 * t)) * X.lp(rng.normal(0, 1, n), 3)
@@ -43,18 +48,18 @@ if mode == 'main':
         d = X.dur(c)
         for t, key in meta[k][1]: X.put(voice, off + t, X.rd(f'{G}/voice/{key}.wav'))
         if k in ('r1', 'r2', 'r3'): race_sfx(sfx, off, k, d)
-        if k == 'title': X.put(sfx, 0.0, beep(1320, 0.08, 0.08)); X.put(sfx, 0.1, whoosh(1.0, 0.15)); X.put(sfx, 0.3, crowd(2.0, 0.05))
+        if k == 'title': X.put(sfx, 0.0, pad(min(d, 8.0)))   # 冒頭は小さく澄んだ和音だけ（ユーザー指示 2026-11-27）
         if k in ('data', 'rule', 'reveal', 'sweep', 'outro'): X.put(sfx, off, whoosh(0.8, 0.18))
-        if k.startswith('res'): X.put(sfx, off + 0.05, X.thump(60, 0.5, 0.5)); X.put(sfx, off + 0.1, crowd(2.2, 0.07))
+        if k.startswith('res'): X.put(sfx, off + 0.05, X.thump(110, 0.35, 0.35, 18)); X.put(sfx, off + 0.1, crowd(2.2, 0.06))
         if k == 'jingle': X.put(sfx, off + 0.05, beep(988, 0.12, 0.18)); X.put(sfx, off + 0.17, beep(1318, 0.35, 0.18))
-        if k in ('wow2', 'wow3'): X.put(sfx, off, X.boom(1.4, 42, 0.5)); X.put(sfx, off, X.thump(70, 0.4, 0.7))
-        if k in ('rh1', 'rh2'): X.put(sfx, off, whoosh(0.9, 0.25)); X.put(sfx, off + 0.05, X.thump(50, 0.6, 0.5, 6))
+        if k in ('wow2', 'wow3'): X.put(sfx, off, X.thump(110, 0.35, 0.45, 18)); X.put(sfx, off, ping(880, 0.08))   # 低い爆発音はやめて軽い「ドン」
+        if k in ('rh1', 'rh2'): X.put(sfx, off, whoosh(0.9, 0.2))
         off += d
     X.finish(f'{G}/main_video.mp4', voice, sfx, T, '/home/claude/bgm/Volatile_Reaction.mp3', f'{G}/wrr_main.mp4', '1100k')
 else:
     m = json.load(open(f'{G}/s_meta.json')); T = m['dur']; n = int(T * SR) + SR; voice = np.zeros(n, np.float32); sfx = np.zeros(n, np.float32)
     for t, key in m['cues']: X.put(voice, t, X.rd(f'{G}/voice/{key}.wav'))
-    X.put(sfx, 0.0, beep(1320, 0.08, 0.1)); X.put(sfx, 0.3, whoosh(0.8, 0.2))
+    X.put(sfx, 0.0, pad(3.0, 0.03))
     for s in m['steps']: X.put(sfx, s, whoosh(0.6, 0.2)); X.put(sfx, s + 0.05, pistol(0.25)); X.put(sfx, s + 1.6, ping(990, 0.12))
     X.put(sfx, m['steps'][0] + 0.1, ff(1.4))
     X.put(sfx, m['end0'], whoosh(0.7, 0.2)); X.put(sfx, m['endc'], beep(988, 0.12, 0.15)); X.put(sfx, m['endc'] + 0.12, beep(1318, 0.3, 0.15))
