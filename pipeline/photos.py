@@ -4,6 +4,7 @@
   python3 photos.py get <id> <保存名.jpg>               → 1024px の写真を保存し、credits.json にクレジットを追記
 - Wikimedia Commons と Flickr の画像そのものはシェルから取れない（429 / 403）が、Openverse の thumb（full_size）経由なら取れる。
 - 1回の検索・取得のあいだは2秒以上あける（ログインなしだと、たくさん続けると数十分止められる）。
+- **先に集めた写真があればそれを使う**：`assets/photos/<slug>/`（写真＋credits.json）。なければ自分で集め、使った写真は同じ場所に入れて main に push しておく（1枚300KB以下に縮めてから）。
 - ライセンスは CC0 / Public Domain / CC BY を優先。CC BY-SA は、クレジットに「CC BY-SA」と書けば使ってよい。NC（非営利）・ND（改変禁止）は使わない（検索で除外している）。
 - 必ず目で見て選ぶ：場所が合っているか、知らない人の顔がはっきり写っていないか、事件・事故・遺体を連想させないか。
 """
@@ -24,7 +25,10 @@ def search(q, n=8):
         print(f"{r['id']} | {r['license']} {r.get('license_version') or ''} | {(r.get('creator') or '?')[:20]} | {r.get('width')}x{r.get('height')} | {r['title'][:60]}")
     json.dump(d, open('.last_search.json', 'w')); return d['results']
 def get(pid, out):
-    meta = json.loads(_get(API + pid + '/'))
+    meta = None
+    if os.path.exists('.last_search.json'):   # 検索結果にある情報を使って、APIを呼ぶ回数を減らす
+        meta = next((r for r in json.load(open('.last_search.json')).get('results', []) if r['id'] == pid), None)
+    if meta is None: meta = json.loads(_get(API + pid + '/'))
     code = _get(API + pid + '/thumb/?full_size=true', out)
     if str(code) != '200': print('取得失敗', code); return None
     c = json.load(open(CRED)) if os.path.exists(CRED) else []
