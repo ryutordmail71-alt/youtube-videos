@@ -1,0 +1,41 @@
+【クレジット】都市伝説：遊ぶとおかしくなるゲーム「ポリビアス」
+
+※言い伝え・うわさをもとにした紹介です。実在の場所の立ち入り禁止区域には入らないでください。
+※ゲーム機「ポリビアス」の写真は見つかっていません。動画とサムネイルの黒いゲーム機は、言い伝えをもとにこの動画のためにプログラムで描いた架空のイメージです。
+
+■ 写真（自由ライセンス。「イメージ」と書いた写真は、うわさの場所そのものではありません）
+・"A token slot on an arcade game cabinet." by stirrell42（CC0）https://wordpress.org/photos/photo/16563076bd/
+・"Flashbacks arcade, Seaside Heights, NJ, 7/22/08 - 1 of 5" by goodrob13（CC BY 2.0）https://www.flickr.com/photos/25030443@N03/2793665742
+・"20100513_mg1592" by ocean yamaha（CC BY 2.0）https://www.flickr.com/photos/50527177@N00/4606030368
+・"Retro Arcade" by mlcastle（CC BY-SA 2.0）https://www.flickr.com/photos/66458073@N00/9481870002
+・"Retro arcade machines" by M Cavendish（CC BY 2.0）https://www.flickr.com/photos/157600604@N07/42319665512
+・"A Burnside View"（オレゴン州ポートランドの夜景）by Ian Sane（CC BY 2.0）https://www.flickr.com/photos/31246066@N04/8177689699
+・"I'll Leave The Light On" by Ian Sane（CC BY 2.0）https://www.flickr.com/photos/31246066@N04/5630024282
+写真は暗さ・色・切り抜きを調整し、霧の効果を重ねています（改変あり）。
+ライセンス：CC BY 2.0 https://creativecommons.org/licenses/by/2.0/ ／ CC BY-SA 2.0 https://creativecommons.org/licenses/by-sa/2.0/
+
+■ 地図
+・アメリカの地図は、空港の位置（vega-datasets の airports データ）を点で描いたものです
+
+■ ナレーション
+VOICEVOX:青山龍星
+
+■ BGM
+"Investigations" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+■ 効果音
+鐘・電子音・風の音などは、すべてプログラムで合成しました
+
+■ 参考にした資料（言い伝えと、公開されている情報）
+・Wikipedia「Polybius (urban legend)」https://en.wikipedia.org/wiki/Polybius_(urban_legend)
+・Skeptoid #362「Polybius: Video Game of Death」（Brian Dunning, 2013）https://skeptoid.com/episodes/362
+・1981年の出来事（ゲームセンターで若者2人の具合が悪くなった件、約10日後の一斉捜索）は、上の資料が引用している当時の新聞記事（Eugene Register-Guard 1981年11月29日など）による
+・うわさが初めて文字になった時期：古いゲーム機の情報サイト coinop.org の記事（日付は1998年と表示されるが、実際には2000年ごろとする見方が多い）
+・2003年のアメリカのゲーム雑誌（GamePro）の特集、2017年に発売された同じ名前のゲーム（Llamasoft）
+・名前の由来：古代ギリシャの歴史家ポリュビオス（紀元前200年ごろの生まれ）と「ポリュビオスの暗号表（5×5のマス）」
+
+■ 目安・注意
+・「数週間で消えた」「黒い服の男たち」などは言い伝えの内容で、事実として確かめられたものではありません
+・社名「Sinneslöschen」の意味（「感覚を消す」）は、言い伝えでよく言われている訳です（ドイツ語としては少し不自然とされています）
