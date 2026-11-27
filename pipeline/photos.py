@@ -3,20 +3,25 @@
   python3 photos.py search "Poveglia island" 8        → 候補を表示（ライセンス・作者・説明）
   python3 photos.py get <id> <保存名.jpg>               → 1024px の写真を保存し、credits.json にクレジットを追記
 - Wikimedia Commons と Flickr の画像そのものはシェルから取れない（429 / 403）が、Openverse の thumb（full_size）経由なら取れる。
-- 1回の検索・取得のあいだは2秒以上あける（ログインなしだと、たくさん続けると数十分止められる）。
+- 1回の検索・取得のあいだは20秒あける（自動）（ログインなしだと、たくさん続けると数十分止められる）。
 - **先に集めた写真があればそれを使う**：`assets/photos/<slug>/`（写真＋credits.json）。なければ自分で集め、使った写真は同じ場所に入れて main に push しておく（1枚300KB以下に縮めてから）。
 - ライセンスは CC0 / Public Domain / CC BY を優先。CC BY-SA は、クレジットに「CC BY-SA」と書けば使ってよい。NC（非営利）・ND（改変禁止）は使わない（検索で除外している）。
 - 必ず目で見て選ぶ：場所が合っているか、知らない人の顔がはっきり写っていないか、事件・事故・遺体を連想させないか。
 """
-import json, os, subprocess, sys, time, urllib.parse
+import json, os, re, subprocess, sys, time, urllib.parse
 API = 'https://api.openverse.org/v1/images/'
 CRED = 'credits.json'
 def _get(url, out=None):
-    time.sleep(2)
+    time.sleep(20)
     args = ['curl', '-s', '-m', '40', '-A', 'YouTubeVideoBot/1.0 (https://github.com/ryutordmail71-alt/youtube-videos)']
     if out: args += ['-o', out, '-w', '%{http_code}']
-    r = subprocess.run(args + [url], capture_output=True, text=not out)
-    return r.stdout
+    for _ in range(10):
+        r = subprocess.run(args + [url], capture_output=True, text=True).stdout
+        txt = r if not out else (open(out, errors='ignore').read(300) if os.path.exists(out) else '')
+        m = re.search(r'available in (\d+) second', txt)
+        if not m: return r.strip()
+        print('混んでいるので待ちます', m.group(1), '秒', flush=True); time.sleep(int(m.group(1)) + 5)
+    return r.strip()
 def search(q, n=8):
     url = API + '?' + urllib.parse.urlencode({'q': q, 'license_type': 'commercial,modification', 'mature': 'false'})
     d = json.loads(_get(url))
