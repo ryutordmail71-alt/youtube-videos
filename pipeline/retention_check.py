@@ -22,6 +22,9 @@ for i, m in enumerate(moving):
         if t - start >= LIM: static.append((start, t))
         start = None
 if start is not None and len(moving) / 4 - start >= LIM: static.append((start, len(moving) / 4))
+if mode == 'main':   # 最後の12秒は終了画面用なので対象外
+    endcut = len(moving) / 4 - 12
+    static = [(a, min(b, endcut)) for a, b in static if a < endcut and min(b, endcut) - a >= LIM]
 # 2) 無音
 err = subprocess.run(['ffmpeg', '-v', 'info', '-i', path, '-af', 'silencedetect=noise=-45dB:d=1.0', '-f', 'null', '-'], capture_output=True, text=True).stderr
 sil = [(float(a), float(b)) for a, b in re.findall(r'silence_start: ([\d.]+)[\s\S]*?silence_end: ([\d.]+)', err)]
