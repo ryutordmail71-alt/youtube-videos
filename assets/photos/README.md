@@ -9,4 +9,5 @@
 - maboroshi-eki ＝ 都市伝説：東京の地下鉄の「幻の駅」
 - skyfish ＝ 都市伝説：スカイフィッシュ
 - black-eyed-kids ＝ 都市伝説：ブラックアイド・キッズ
+- skyfish の写真は Openverse が混雑で使えなかったため NASA（パブリックドメイン）から取った（2026-11-28）
 - tokyo-chika ＝ 都市伝説：東京の地下に眠る秘密の通路
