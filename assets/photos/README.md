@@ -10,4 +10,4 @@
 - skyfish ＝ 都市伝説：スカイフィッシュ
 - black-eyed-kids ＝ 都市伝説：ブラックアイド・キッズ（2026-11-28 制作時に Wikimedia Commons の API から取得。Openverse は4時間待ちと言われて使えなかった。Commons の API 検索〔commons.wikimedia.org/w/api.php、generator=search＋imageinfo の iiurlwidth=1280〕と thumburl の取得はシェルから通った。429 が出たら数十秒あけて再試行。作業用のスクリプトは pipeline/examples/bek/commons.py・cget.py）
 - skyfish の写真は Openverse が混雑で使えなかったため NASA（パブリックドメイン）から取った（2026-11-28）
-- tokyo-chika ＝ 都市伝説：東京の地下に眠る秘密の通路
+- tokyo-chika ＝ 都市伝説：東京の地下に眠る秘密の通路（2026-11-29 制作時に Wikimedia Commons の API から取得。制作コードは pipeline/examples/tkc。コードは /home/claude/tkc にコピーして ph/ に写真を置く前提）
